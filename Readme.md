@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Ivan Arkhipov](https://up.htmlacademy.ru/javascript/25/user/1802943).
-* Наставник: `Неизвестно`.
+* Наставник: `Сергей Карпов`.
 
 ---
 
@@ -10,7 +10,7 @@ _`.editorconfig`, `.eslintrc`, `.gitattributes`, `.gitignore`, `package-lock.jso
 
 ---
 
-[Как работать с Git на проекте](Contributing.md) | [Как работать над проектом](Workflow.md)
+[Как работать с Git на проекте](Contributing. md) | [Как работать над проектом](Workflow.md)
 
 ### Памятка
 
