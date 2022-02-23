@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Ivan Arkhipov](https://up.htmlacademy.ru/javascript/25/user/1802943).
-* Наставник: `Сергей Карпов`.
+* Наставник: [Сергей Карпов](https://htmlacademy.ru/profile/id518893).
 
 ---
 
