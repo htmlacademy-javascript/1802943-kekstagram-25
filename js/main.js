@@ -1,24 +1,36 @@
 //Первая функция
 
-function randomize(min, max) {
-  const random = min + Math.random() * (max - min + 1);
-  if (min < 0 || max < 0 || min === max && max === min) {
-    //Введите неравнозначные положительные числа!
-  }  else {
-    return Math.round(random);
+function getRandofromclusiveInteger(from, to) {
+  //Гвард (нет числовых значений || два отрицательных значения)
+  if (typeof from !== 'number' || typeof to !== 'number' || from < 0 && to < 0) {
+    return null;
   }
+  //Числа равны
+  if (from === to) {
+    return from;
+  }
+  //Число
+  if (from < 0 && to > 0) {
+    from = 0;
+  }
+
+  if (to < 0 && from > 0) {
+    to = 0;
+  }
+  //Диапазон перевернут
+  if (from > to) {
+    [from, to] = [to, from];
+  }
+
+  return Math.round(Math.ceil(from) + Math.random() * (Math.floor(to) - Math.ceil(from) + 1));
 }
-randomize();
+
+getRandofromclusiveInteger();
 
 //Вторая функция
 
-function validation(line, maxWidth) {
-  if (line.length > maxWidth) {
-    return false;
-  }  else {
-    return true;
-  }
+function isValidStringLength(line = '', maxWidth) {
+  return line.length <= maxWidth;
 }
-//первый атрибут - комментарий в кавычках
 
-validation();
+isValidStringLength('строка', 6);
