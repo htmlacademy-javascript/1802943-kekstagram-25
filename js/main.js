@@ -24,8 +24,8 @@ function getRandomInclusiveInteger(from, to) {
     [from, to] = [to, from]; //деструктурирующее присваивание
   }
 
-  min = Math.ceil(from);
-  max = Math.floor(to);
+  const min = Math.ceil(from);
+  const max = Math.floor(to);
   return Math.floor(min + Math.random() * (max - min + 1));
 }
 
