@@ -4,7 +4,7 @@ function getRandomInclusiveInteger(from, to) {
   //Гвард (нет числовых значений || два отрицательных значения)
   if (typeof from !== 'number' ||
   typeof to !== 'number' ||
-  from < 0 && to < 0) {
+  (from < 0 && to < 0)) {
   return null;
   }
 
