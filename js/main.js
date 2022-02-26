@@ -2,8 +2,10 @@
 
 function getRandomInclusiveInteger(from, to) {
   //Гвард (нет числовых значений || два отрицательных значения)
-  if (typeof from !== 'number' || typeof to !== 'number' || from < 0 && to < 0) {
-    return null;
+  if (typeof from !== 'number' ||
+  typeof to !== 'number' ||
+  from < 0 && to < 0) {
+  return null;
   }
 
   //Одно отрицательное число
@@ -22,14 +24,16 @@ function getRandomInclusiveInteger(from, to) {
     [from, to] = [to, from]; //деструктурирующее присваивание
   }
 
-  return Math.round(Math.ceil(from) + Math.random() * (Math.floor(to) - Math.ceil(from) + 1));
+  min = Math.ceil(from);
+  max = Math.floor(to);
+  return Math.floor(min + Math.random() * (max - min + 1));
 }
 
 getRandomInclusiveInteger();
 
 //Вторая функция
 
-function isValidStringLength(line = '', maxWidth) {
+function isValidStringLength (line = '', maxWidth) {
   return line.length <= maxWidth;
 }
 
