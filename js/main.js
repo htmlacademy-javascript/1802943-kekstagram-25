@@ -53,43 +53,66 @@ const namesArray = [
   'Толян',
   'Борисыч',
   'Джульетта',
-  'Дед Максим'
+  'Дед Максим',
+  'Хисока'
 ];
 
 const descriptionArray = [
   'Красивое',
   'Пойдет',
   'Не красивое',
-  'Огонь'
+  'Огонь',
+  'Удалить немедленно'
 ];
 
 const getRandomArrayElement = (elements) => elements[getRandomInclusiveInteger(0, elements.length - 1)];
 
-function photoDescription (_, countPosition) {
-  const randomImage = countPosition + 1;
-
-  return {
-    id: randomImage,
-    url: 'photos/&{randomImage}.jpg',
-    description: getRandomArrayElement(descriptionArray),
-    likes: getRandomInclusiveInteger(15, 200),
-    comment: Array.from({length:getRandomInclusiveInteger(1, 10)}, commentsList)
-  };
-}
-
 function createIdGenerator () {
   let lastGeneratedId = 0;
+
   return function () {
     lastGeneratedId += 1;
     return lastGeneratedId;
   };
 }
 
+function getPhotoNumber () {
+  let lastGeneratedId = 0;
+
+  return function () {
+    lastGeneratedId += 1;
+    return lastGeneratedId;
+  };
+}
+
+const generatePhotoId = createIdGenerator();
+const generatePhotoNumber = getPhotoNumber ();
+// const getRandomPhoto = creatRandomIdFromRangeGenerator();
+
+function photoDescription () {
+
+  return {
+    id: generatePhotoId(),
+    url: `photos/${generatePhotoNumber()}.jpg`,
+    description: getRandomArrayElement(descriptionArray),
+    likes: getRandomInclusiveInteger(15, 200),
+    comment: Array.from({length:getRandomInclusiveInteger(1, 6)}, commentsList)
+  };
+}
+
+const generateCommentId = createIdGenerator();
+
 function commentsList () {
   return {
-    id: createIdGenerator(),
-    avatar: 'img/avatar-{getRandomInclusiveInteger (1, 6)}.svg',
+    id: generateCommentId(),
+    avatar: `img/avatar-${getRandomInclusiveInteger(1, 6)}.svg`,
     message: getRandomArrayElement(commentsArray),
     name: getRandomArrayElement(namesArray)
   };
 }
+
+const GENERAL_ARRAY_LENGTH = 25;
+
+const generateTargetArray = Array.from({length: GENERAL_ARRAY_LENGTH}, photoDescription);
+// eslint-disable-next-line
+console.log(generateTargetArray);
