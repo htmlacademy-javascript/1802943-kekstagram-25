@@ -1,4 +1,30 @@
 //Первая функция
+const HOW_MANY_POSTS = 25;
+
+const COMMENTS = [
+  'Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+];
+
+const NAMES = [
+  'Толян',
+  'Борисыч',
+  'Джульетта',
+  'Дед Максим',
+  'Хисока'
+];
+
+const DESCRIPTIONS = [
+  'Красивое',
+  'Пойдет',
+  'Не красивое',
+  'Огонь',
+  'Удалить немедленно'
+];
 
 function getRandomInclusiveInteger(from, to) {
   //Гвард (нет числовых значений || два отрицательных значения)
@@ -27,6 +53,7 @@ function getRandomInclusiveInteger(from, to) {
 
   const min = Math.ceil(from);
   const max = Math.floor(to);
+
   return Math.floor(min + Math.random() * (max - min + 1));
 }
 
@@ -34,85 +61,60 @@ getRandomInclusiveInteger();
 
 //Вторая функция
 
-function isValidStringLength (line = '', maxWidth) {
+function checkStringLength (line = '', maxWidth) {
   return line.length <= maxWidth;
 }
 
-isValidStringLength('строка', 6);
+checkStringLength('строка', 6);
 
-const commentsArray = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-];
+/**
+ * Получение случаного элемента из массива
+ * @param {Array} array - исходный массив
+ * @returns {*} - может быть массив из элементов любого типа
+ */
+function getRandomArrayElement (array) {
+  return  array[getRandomInclusiveInteger(0, array.length - 1)];
+}
 
-const namesArray = [
-  'Толян',
-  'Борисыч',
-  'Джульетта',
-  'Дед Максим',
-  'Хисока'
-];
-
-const descriptionArray = [
-  'Красивое',
-  'Пойдет',
-  'Не красивое',
-  'Огонь',
-  'Удалить немедленно'
-];
-
-const getRandomArrayElement = (elements) => elements[getRandomInclusiveInteger(0, elements.length - 1)];
-
-function createIdGenerator () {
-  let lastGeneratedId = 0;
+function createRandomIdFromRangeGenerator (from, to) {
+  const previousValues = [];
 
   return function () {
-    lastGeneratedId += 1;
-    return lastGeneratedId;
+    let currentValue = getRandomInclusiveInteger(from, to);
+    if (previousValues.length >= (to - from + 1)) {
+      return null;
+    }
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInclusiveInteger(from, to);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
   };
 }
 
-function getPhotoNumber () {
-  let lastGeneratedId = 0;
-
-  return function () {
-    lastGeneratedId += 1;
-    return lastGeneratedId;
-  };
-}
-
-const generatePhotoId = createIdGenerator();
-const generatePhotoNumber = getPhotoNumber ();
-// const getRandomPhoto = creatRandomIdFromRangeGenerator();
-
-function photoDescription () {
+function createPhotoDescription (_, index) {
+  const postId = index + 1;
 
   return {
-    id: generatePhotoId(),
-    url: `photos/${generatePhotoNumber()}.jpg`,
-    description: getRandomArrayElement(descriptionArray),
+    id: postId,
+    url: `photos/${postId}.jpg`,
+    description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomInclusiveInteger(15, 200),
-    comment: Array.from({length:getRandomInclusiveInteger(1, 6)}, commentsList)
+    comment: Array.from({length:getRandomInclusiveInteger(1, 6)}, generateCommentsList)
   };
 }
 
-const generateCommentId = createIdGenerator();
+const generateCommentId = createRandomIdFromRangeGenerator(1, 999);
 
-function commentsList () {
+function generateCommentsList () {
   return {
     id: generateCommentId(),
     avatar: `img/avatar-${getRandomInclusiveInteger(1, 6)}.svg`,
-    message: getRandomArrayElement(commentsArray),
-    name: getRandomArrayElement(namesArray)
+    message: getRandomArrayElement(COMMENTS),
+    name: getRandomArrayElement(NAMES)
   };
 }
 
-const GENERAL_ARRAY_LENGTH = 25;
-
-const generateTargetArray = Array.from({length: GENERAL_ARRAY_LENGTH}, photoDescription);
+const generatePostsArray = Array.from({length: HOW_MANY_POSTS}, createPhotoDescription);
 // eslint-disable-next-line
-console.log(generateTargetArray);
+console.log(generatePostsArray);
