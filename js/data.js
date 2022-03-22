@@ -1,6 +1,6 @@
 const POSTS_QUANTITY = 25;
 
-const COMMENTS = [
+const USERS_COMMENTS = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -9,7 +9,7 @@ const COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-const NAMES = [
+const USERS_NAMES = [
   'Толян',
   'Борисыч',
   'Джульетта',
@@ -17,7 +17,7 @@ const NAMES = [
   'Хисока'
 ];
 
-const DESCRIPTIONS = [
+const PHOTO_DESCRIPTIONS = [
   'Красивое',
   'Пойдет',
   'Не красивое',
@@ -25,4 +25,4 @@ const DESCRIPTIONS = [
   'Удалить немедленно'
 ];
 
-export {POSTS_QUANTITY, COMMENTS, NAMES, DESCRIPTIONS};
+export {POSTS_QUANTITY, USERS_COMMENTS, USERS_NAMES, PHOTO_DESCRIPTIONS};
