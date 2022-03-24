@@ -1,14 +1,19 @@
-import {POSTS_QUANTITY, COMMENTS, NAMES, DESCRIPTIONS} from './data.js';
+import {
+  POSTS_QUANTITY, USERS_COMMENTS, USERS_NAMES, PHOTO_DESCRIPTIONS, MIN_COMMENT_ID,
+  MAX_COMMENT_ID, MIN_AVATAR_NUMBER, MAX_AVATAR_NUMBER, MIN_LIKES_QUANTITY,
+  MAX_LIKES_QUANTITY, MIN_COMMENT_NUMBER, MAX_COMMENT_NUMBER
+} from './data.js';
+
 import {getRandomInclusiveInteger, getRandomArrayElement, createRandomIdFromRangeGenerator} from './util.js';
 
-const generateCommentId = createRandomIdFromRangeGenerator(1, 999);
+const generateCommentId = createRandomIdFromRangeGenerator(MIN_COMMENT_ID, MAX_COMMENT_ID);
 
 function makeCommentsContent () {
   return {
     id: generateCommentId(),
-    avatar: `img/avatar-${getRandomInclusiveInteger(1, 6)}.svg`,
-    message: getRandomArrayElement(COMMENTS),
-    name: getRandomArrayElement(NAMES)
+    avatar: `img/avatar-${getRandomInclusiveInteger(MIN_AVATAR_NUMBER, MAX_AVATAR_NUMBER)}.svg`,
+    message: getRandomArrayElement(USERS_COMMENTS),
+    name: getRandomArrayElement(USERS_NAMES)
   };
 }
 
@@ -18,9 +23,9 @@ function makePhotoDescription (_, index) {
   return {
     id: postId,
     url: `photos/${postId}.jpg`,
-    description: getRandomArrayElement(DESCRIPTIONS),
-    likes: getRandomInclusiveInteger(15, 200),
-    comment: Array.from({length:getRandomInclusiveInteger(1, 6)}, makeCommentsContent)
+    description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
+    likes: getRandomInclusiveInteger(MIN_LIKES_QUANTITY, MAX_LIKES_QUANTITY),
+    comment: Array.from({length:getRandomInclusiveInteger(MIN_COMMENT_NUMBER, MAX_COMMENT_NUMBER)}, makeCommentsContent)
   };
 }
 
