@@ -1,6 +1,4 @@
-import {usersPosts} from './users-posts.js';
-// eslint-disable-next-line
+import {generatePosts} from './users-posts.js';
 import {renderUserThumbnails} from './thumbnails-rendering.js';
 
-// eslint-disable-next-line
-console.log(usersPosts);
+renderUserThumbnails(generatePosts());

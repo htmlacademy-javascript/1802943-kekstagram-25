@@ -17,7 +17,7 @@ function makeCommentsContent () {
   };
 }
 
-function makePhotoDescription (_, index) {
+function generatePost (_, index) {
   const postId = index + 1;
 
   return {
@@ -29,6 +29,8 @@ function makePhotoDescription (_, index) {
   };
 }
 
-const usersPosts = Array.from({length: POSTS_QUANTITY}, makePhotoDescription);
+function generatePosts () {
+  return Array.from({length: POSTS_QUANTITY}, generatePost);
+}
 
-export {usersPosts};
+export {generatePosts};
