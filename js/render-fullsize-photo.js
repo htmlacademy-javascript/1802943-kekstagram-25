@@ -25,7 +25,6 @@ function clozeFullSizePhoto() {
 }
 
 function renderFullSizePhoto (userPost) {
-  console.log(userPost);
 
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
