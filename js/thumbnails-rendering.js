@@ -1,8 +1,8 @@
-import {setFullSizeModeOnClick} from './full-size-mode-on-click.js';
+import {renderFullSizePhoto} from './render-fullsize-photo.js';
 
 //Контейнер для изображений от других пользователей
 const picturesContainer = document.querySelector('.pictures');
-//Поиск шаблона, получение его содержимого
+//Поиск шаблона по id, получение его содержимого из элемента с классом .picture
 const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
 // console.log(picturesTemplate);
 
@@ -10,9 +10,8 @@ const picturesFragment = document.createDocumentFragment();
 
 function renderUserThumbnails(usersPosts) {
   usersPosts.forEach((userPost) => {
-    //клонируем шаблон
+    //клонирование шаблона
     const pictureElement = picturesTemplate.cloneNode(true);
-    // console.log(pictureElement);
 
     //превьюшки
     pictureElement.querySelector('.picture__img').src = userPost.url;
@@ -22,7 +21,7 @@ function renderUserThumbnails(usersPosts) {
     //полноразмерные фото
     // eslint-disable-next-line
     pictureElement.addEventListener('click', function () {
-      setFullSizeModeOnClick(userPost);
+      renderFullSizePhoto(userPost);
     });
 
     picturesFragment.appendChild(pictureElement);
