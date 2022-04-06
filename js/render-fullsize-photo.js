@@ -43,3 +43,5 @@ function renderFullSizePhoto (userPost) {
 escButton.addEventListener('click', clozeFullSizePhoto);
 
 export {renderFullSizePhoto};
+
+//Коммент для обновления файла
