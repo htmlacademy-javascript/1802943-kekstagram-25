@@ -1,3 +1,3 @@
-const pressEscKey = (evt) => evt.key === 'Escape';
+const onEscKeyPress = (evt) => evt.key === 'Escape';
 
-export {pressEscKey};
+export {onEscKeyPress};
