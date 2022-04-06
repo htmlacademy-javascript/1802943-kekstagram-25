@@ -10,7 +10,7 @@ const picturesFragment = document.createDocumentFragment();
 
 function renderUserThumbnails(usersPosts) {
   usersPosts.forEach((userPost) => {
-    //клонирование шаблона
+    //клонирование
     const pictureElement = picturesTemplate.cloneNode(true);
 
     //превьюшки
@@ -20,9 +20,14 @@ function renderUserThumbnails(usersPosts) {
 
     //полноразмерные фото
     // eslint-disable-next-line
-    pictureElement.addEventListener('click', function () {
-      renderFullSizePhoto(userPost);
-    });
+    // pictureElement.addEventListener('click', function () {
+    //   renderFullSizePhoto(userPost);
+    // });
+    const openFullSize = () => pictureElement.addEventListener(
+      'click', renderFullSizePhoto(userPost)
+    );
+
+    pictureElement.addEventListener('click', openFullSize);
 
     picturesFragment.appendChild(pictureElement);
   });
