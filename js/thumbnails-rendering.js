@@ -1,18 +1,33 @@
+import {renderFullSizePhoto} from './render-fullsize-photo.js';
+
 //Контейнер для изображений от других пользователей
 const picturesContainer = document.querySelector('.pictures');
-//Поиск шаблона, получение его содержимого
-const picturesTemplate = document.querySelector('#picture').content;
+//Поиск шаблона по id, получение его содержимого из элемента с классом .picture
+const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
+// console.log(picturesTemplate);
 
 const picturesFragment = document.createDocumentFragment();
 
 function renderUserThumbnails(usersPosts) {
-  usersPosts.forEach(({url, likes, comment}) => {
-    //клонируем шаблон
+  usersPosts.forEach((userPost) => {
+    //клонирование
     const pictureElement = picturesTemplate.cloneNode(true);
 
-    pictureElement.querySelector('.picture__img').src = url;
-    pictureElement.querySelector('.picture__comments').textContent = comment.length;
-    pictureElement.querySelector('.picture__likes').textContent = likes;
+    //превьюшки
+    pictureElement.querySelector('.picture__img').src = userPost.url;
+    pictureElement.querySelector('.picture__comments').textContent = userPost.comment.length;
+    pictureElement.querySelector('.picture__likes').textContent = userPost.likes;
+
+    //полноразмерные фото
+    // eslint-disable-next-line
+    // pictureElement.addEventListener('click', function () {
+    //   renderFullSizePhoto(userPost);
+    // });
+    const openFullSize = () => pictureElement.addEventListener(
+      'click', renderFullSizePhoto(userPost)
+    );
+
+    pictureElement.addEventListener('click', openFullSize);
 
     picturesFragment.appendChild(pictureElement);
   });

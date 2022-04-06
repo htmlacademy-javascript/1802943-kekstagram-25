@@ -14,10 +14,12 @@ function getRandomInclusiveInteger(from, to) {
   if (to < 0) {
     to = 0;
   }
+
   //Числа равны
   if (from === to) {
     return from;
   }
+
   //Диапазон перевернут
   if (from > to) {
     [from, to] = [to, from]; //деструктурирующее присваивание
@@ -57,5 +59,6 @@ function createRandomIdFromRangeGenerator (from, to) {
     return currentValue;
   };
 }
+
 
 export {getRandomInclusiveInteger, checkStringLength, getRandomArrayElement, createRandomIdFromRangeGenerator};
